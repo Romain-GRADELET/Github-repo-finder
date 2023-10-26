@@ -101,7 +101,7 @@ function App() {
         )}
         />
 
-        <Route path="*" element={<Segment><h1>404</h1></Segment>} />
+        <Route path="*" element={<Segment><h1>Ce chemin n'existe pas, Retournez sur "Recherche" et essayez une nouvelle recherche</h1></Segment>} />
       </Routes>
     </Container>
   );

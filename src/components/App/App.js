@@ -74,8 +74,28 @@ function App() {
           element={(
             <Segment>
               <ul>
-                <li>A quoi ça sert ? A chercher des trucs</li>
-                <li>C'est dingue quand même ? Oui.</li>
+                <li>
+                  <strong>A quoi ça sert ?</strong>
+                  <p>
+                    Cette application permet de trouver une liste de dépôts GitHub
+                    pour un critère donné.
+                  </p>
+                </li>
+                <br />
+                <li>
+                  <strong>Comment faire une recherche ?</strong>
+                  <p>
+                    Sur la page recherche, complétez le champ de recherche et
+                    valider la recherche.
+                  </p>
+                </li>
+                <br />
+                <li>
+                  <strong>Puis-je chercher n'importe quel terme ?</strong>
+                  <p>
+                    Oui, c'est fou.
+                  </p>
+                </li>
               </ul>
             </Segment>
         )}

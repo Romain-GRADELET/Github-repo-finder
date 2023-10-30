@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  Container, Dimmer, Image, Loader, Menu, Segment,
+  Container, Dimmer, Loader, Menu, Segment,
 } from 'semantic-ui-react';
 
 import './App.scss';

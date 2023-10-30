@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Container, Menu, Segment } from 'semantic-ui-react';
+import {
+  Container, Dimmer, Loader, Menu, Segment,
+} from 'semantic-ui-react';
 
 import './App.scss';
 import logoGithub from 'src/assets/images/logo-github.png';
@@ -15,8 +17,13 @@ function App() {
   const [repositories, setRepositories] = useState([]);
   const [search, setSearch] = useState('react');
   const [repositoriesError, setRepositoriesError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getRepositories = () => {
+    // Avant 'appel à l'API, j'indique que je suis en train de charger les données
+    // En passant le loading state à true
+    setLoading(true);
+
     axios.get(`https://api.github.com/search/repositories?q=${search}`)
       .then((res) => {
         setTotalCount(res.data.total_count);
@@ -26,6 +33,9 @@ function App() {
       })
       .catch((error) => {
         setRepositoriesError(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -53,20 +63,30 @@ function App() {
         <Route
           path="/"
           element={(
-            <>
-              <SearchBar
-                search={search}
-                setSearch={setSearch}
-                getRepositories={getRepositories}
-              />
-              <Message totalCount={totalCount} />
-              {
-              repositoriesError
-                ? <p>{repositoriesError.message}</p>
-                : <Repositories repositories={repositories} />
-              }
-            </>
-        )}
+            loading
+              ? (
+                <Segment>
+                  <Dimmer active>
+                    <Loader>Chargement des données ...</Loader>
+                  </Dimmer>
+                </Segment>
+              )
+              : (
+                <>
+                  <SearchBar
+                    search={search}
+                    setSearch={setSearch}
+                    getRepositories={getRepositories}
+                  />
+                  <Message totalCount={totalCount} />
+                  {
+                  repositoriesError
+                    ? <p>{repositoriesError.message}</p>
+                    : <Repositories repositories={repositories} />
+                  }
+                </>
+              )
+          )}
         />
 
         <Route

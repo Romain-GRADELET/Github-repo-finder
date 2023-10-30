@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  Container, Dimmer, Loader, Menu, Segment,
+  Container, Dimmer, Image, Loader, Menu, Segment,
 } from 'semantic-ui-react';
 
 import './App.scss';
@@ -66,8 +66,8 @@ function App() {
             loading
               ? (
                 <Segment>
-                  <Dimmer active>
-                    <Loader>Chargement des données ...</Loader>
+                  <Dimmer active inverted>
+                    <Loader size="large">Loading</Loader>
                   </Dimmer>
                 </Segment>
               )

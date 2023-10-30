@@ -18,8 +18,8 @@ function SearchBar({ search, setSearch, getRepositories }) {
         <Input
           required
           fluid
-          icon="search"
-          iconPosition="left"
+          action={{ icon: 'search' }}
+          actionPosition="left"
           placeholder="Search..."
           search={search}
           onChange={(event) => {

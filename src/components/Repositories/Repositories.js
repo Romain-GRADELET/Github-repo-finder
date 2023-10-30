@@ -9,8 +9,8 @@ function Repositories({ repositories }) {
           <Card key={repository.id}>
             <Image src={repository.owner.avatar_url} wrapped ui={false} />
             <Card.Content>
-              <Card.Header>{repository.name}</Card.Header>
-              <Card.Meta>{repository.owner.login}</Card.Meta>
+              <Card.Header><a href={repository.html_url} target="_blank" rel="noreferrer">{repository.name}</a></Card.Header>
+              <Card.Meta><a href={repository.owner.html_url} target="_blank" rel="noreferrer">{repository.owner.login}</a></Card.Meta>
               <Card.Description>{repository.description}</Card.Description>
             </Card.Content>
           </Card>

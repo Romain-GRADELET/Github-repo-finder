@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
+  Button,
   Container, Dimmer, Loader, Menu, Segment,
 } from 'semantic-ui-react';
 
@@ -18,13 +19,14 @@ function App() {
   const [search, setSearch] = useState('react');
   const [repositoriesError, setRepositoriesError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getRepositories = () => {
     // Avant 'appel à l'API, j'indique que je suis en train de charger les données
     // En passant le loading state à true
     setLoading(true);
 
-    axios.get(`https://api.github.com/search/repositories?q=${search}`)
+    axios.get(`https://api.github.com/search/repositories?q=${search}&sort=stars&order=desc&page=${currentPage}&per_page=30`)
       .then((res) => {
         setTotalCount(res.data.total_count);
         // Attention, les repositories étaient dans une clé de l'objet de la réponse
@@ -42,7 +44,7 @@ function App() {
   // Au premier rendu de mon composant (car j'ai passé [] en 2ème paramètre du useEffect)
   // j'appelle la méthode getRepositories qui va récupérer les données depuis l'API
   // et les stocker dans mon state
-  useEffect(getRepositories, []);
+  useEffect(getRepositories, [currentPage]);
 
   return (
     <Container>
@@ -84,6 +86,20 @@ function App() {
                     ? <p>{repositoriesError.message}</p>
                     : <Repositories repositories={repositories} />
                   }
+                  <Segment>
+                    <Button onClick={() => {
+                      setCurrentPage(currentPage - 1);
+                    }}
+                    >
+                      précédent
+                    </Button>
+                    <Button onClick={() => {
+                      setCurrentPage(currentPage + 1);
+                    }}
+                    >
+                      Suivant
+                    </Button>
+                  </Segment>
                 </>
               )
           )}

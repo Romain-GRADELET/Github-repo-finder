@@ -43,7 +43,7 @@ function App() {
 
   // Au premier rendu de mon composant (car j'ai passé [] en 2ème paramètre du useEffect)
   // j'appelle la méthode getRepositories qui va récupérer les données depuis l'API
-  // et les stocker dans mon state
+  // et les stocker dans mon state.
   useEffect(getRepositories, [currentPage]);
 
   return (
